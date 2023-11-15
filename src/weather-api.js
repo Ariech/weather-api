@@ -35,11 +35,7 @@ async function callWeatherApi(parameter) {
     const responseData = processResponse(await response.json());
     return responseData;
   } catch (error) {
-    if (error.status === 404) {
-      throw new Error("City not found. Please enter a valid city name.");
-    } else {
-      throw new Error(`API request failed. Status: ${error.message}`);
-    }
+    return error;
   }
 }
 
