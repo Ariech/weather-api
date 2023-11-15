@@ -6,14 +6,24 @@ const processResponse = (weatherData) => {
   const {
     location: { name: city },
     current: {
-      temp_c: temperature,
-      feelslike_c: feelsLike,
+      temp_c: temperatureC,
+      temp_f: temperatureF,
+      feelslike_c: feelsLikeC,
+      feelslike_f: feelsLikeF,
       humidity,
       wind_kph: wind,
     },
   } = weatherData;
 
-  return { city, temperature, feelsLike, humidity, wind };
+  return {
+    city,
+    temperatureC,
+    temperatureF,
+    feelsLikeC,
+    feelsLikeF,
+    humidity,
+    wind,
+  };
 };
 
 async function callWeatherApi(parameter) {
@@ -21,12 +31,15 @@ async function callWeatherApi(parameter) {
     const response = await fetch(
       `${url}${apiMethod}?key=${apiKey}&q=${parameter}`,
     );
-    if (!response.ok) alert("You entered the city that does not exist");
 
     const responseData = processResponse(await response.json());
     return responseData;
   } catch (error) {
-    return `${error}`;
+    if (error.status === 404) {
+      throw new Error("City not found. Please enter a valid city name.");
+    } else {
+      throw new Error(`API request failed. Status: ${error.message}`);
+    }
   }
 }
 
