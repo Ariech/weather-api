@@ -1,16 +1,24 @@
 import "./style.css";
-import { callWeatherApi } from "./weather-api";
+import callWeatherApi from "./weather-api";
+import displayApiData from "./weather-view";
 
+const searchForm = document.getElementById("search-form");
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
 
 async function apiCall() {
+  if (searchInput.value === "") return;
+
   try {
-    const data = await callWeatherApi(searchInput.value);
-    console.log(data);
+    const proccesedData = await callWeatherApi(searchInput.value);
+    displayApiData(proccesedData);
   } catch (error) {
-    console.log(`Error: ${error}`);
+    alert(`Error: ${error}`);
   }
 }
+
+searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+});
 
 searchButton.addEventListener("click", apiCall);
