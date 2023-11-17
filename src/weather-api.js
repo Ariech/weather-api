@@ -30,6 +30,7 @@ async function callWeatherApi(parameter) {
   try {
     const response = await fetch(
       `${url}${apiMethod}?key=${apiKey}&q=${parameter}`,
+      { mode: "cors" },
     );
 
     const responseData = processResponse(await response.json());
