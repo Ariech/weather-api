@@ -1,5 +1,5 @@
 const apiKey = "b067ed5c72424299acc131107230311";
-const url = "http://api.weatherapi.com/v1";
+const url = "https://api.weatherapi.com/v1";
 const apiMethod = "/current.json";
 
 const processResponse = (weatherData) => {
