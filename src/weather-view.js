@@ -8,9 +8,9 @@ const temperature = document.getElementById("temp");
 const displayApiData = (proccesedData) => {
   if (!proccesedData) return;
 
-  searchResult.classList.add("acitve");
+  searchResult.classList.add("active");
 
-  city.textContent = `City: ${proccesedData.city}`;
+  city.textContent = `${proccesedData.city}`;
   feelsLike.textContent = `Feels like: ${proccesedData.feelsLikeC} °C`;
   temperature.textContent = `Temperature: ${proccesedData.temperatureC} °C`;
   wind.textContent = `Wind: ${proccesedData.wind} km/h`;
